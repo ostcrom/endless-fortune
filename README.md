@@ -1,4 +1,4 @@
-#endless-fortune
+# endless-fortune
 
 endless-fortune is an application to help generate a large amount of container logs in a Kubernetes environment. This tool is intended to stress test Kubernetes environments, so please use accordingly. 
 
@@ -6,7 +6,7 @@ Requires Azure CLI, Docker and kubectl to be installed.
 
 *All steps below assume you are running the commands from within endless-fortune's main directory.*
 
-##Step 1 (Optional):
+## Step 1 (Optional):
 If you don't already have an AKS instance, run this script with your bare subscription ID as a parameter:
 
 ```
@@ -16,7 +16,7 @@ This will create an Azure Container Registery, an AKS cluster and link them toge
 
 Take note of the Azure Container Registry name, with this script it will be "acrk8s" followed by a random number.
 
-##Step 2:
+## Step 2:
 Log into your ACR and list the repository:
 ```
 az acr login --name [ACRNAME]
@@ -25,28 +25,28 @@ az acr list | grep loginServer
 
 The login server should be similar to [ACRNAME].azurecr.io.
 
-##Step 3:
+## Step 3:
 Build the docker image, being sure to tag it with the ACR login server:
 ```
 docker build -t [ACRNAME].azurecr.io/endless-fortune:1
 ```
 
-##Step 4:
+## Step 4:
 Push the docker image to your container registry:
 ```
 docker push [ACRNAME].azurecr.io/endless-fortune:1
 ```
 
-##Step 5:
+## Step 5:
 Update endless-fortune-deployment.yaml.example to have the correct image name on line 17. Save your changes as just "endless-fortune-deployment.yaml".
 
-##Step 6:
+## Step 6:
 Apply the updated manifest to kubernetes:
 ```
 kubectl apply -f ./endless-fortune-deployment.yaml
 ```
 
-###Step 7(Optional):
+## Step 7(Optional):
 You can mess with the deployment yaml in two obvious areas.
 
 First is the replicas, on line 6. This is the number of instances of endless-fortune to run concurrently. (Default AKS limit is 110 pods per node, after accounting for kube-system pods, you have an effective default limit of ~100 pods per nods.)
@@ -60,9 +60,6 @@ Messages/per minute = R * (1/t) * 60
 ```
 
 R is the number of replicas, and "t" is the sleep value provided in the template. So 3 replicas with a ".5" wait would be expected to produce 360 messages per minute (but may not always due to performance issues.)
-
-###References:
-Link to documenation and resources utilized in the creation of this application. 
 
 https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli - Instructions for c
 
