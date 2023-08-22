@@ -63,6 +63,6 @@ R is the number of replicas, and "t" is the sleep value provided in the template
 
 https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli - Instructions for c
 
-##TODO:
+### TODO:
 - Add endless-fortune container image to a public image repo and remove the need to build and push the container image. 
 - May be able to help optimize performance by switching to an Alpine based image. 
