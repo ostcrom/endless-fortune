@@ -61,7 +61,6 @@ Messages/per minute = R * (1/t) * 60
 
 R is the number of replicas, and "t" is the sleep value provided in the template. So 3 replicas with a ".5" wait would be expected to produce 360 messages per minute (but may not always due to performance issues.)
 
-https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli - Instructions for c
 
 ### TODO:
 - Add endless-fortune container image to a public image repo and remove the need to build and push the container image. 
