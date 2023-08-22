@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: endless-fortune
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: endless-fortune
+  template:
+    metadata:
+      labels:
+        app: endless-fortune
+    spec:
+      containers:
+        - name: endless-fortune-container
+          image: [ACRNAME].azurecr.io/endless-fortune:1
+          env:
+            - name: ENV_SLEEP
+              value: "1"
